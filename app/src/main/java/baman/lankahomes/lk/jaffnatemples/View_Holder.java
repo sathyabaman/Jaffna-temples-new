@@ -1,20 +1,24 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by baman on 3/4/16.
  */
-public class View_Holder extends RecyclerView.ViewHolder {
+public class View_Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     CardView cv;
     TextView title;
     TextView description;
     ImageView imageView;
+
 
     View_Holder(View itemView) {
         super(itemView);
@@ -22,5 +26,30 @@ public class View_Holder extends RecyclerView.ViewHolder {
         title = (TextView) itemView.findViewById(R.id.title);
         description = (TextView) itemView.findViewById(R.id.description);
         imageView = (ImageView) itemView.findViewById(R.id.imageView);
+
+        //added by me
+        title.setOnClickListener(this);
+        description.setOnClickListener(this);
+        imageView.setOnClickListener(this);
     }
+
+    //added by me
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+    public TextView getTitle() {
+        return title;
+    }
+    public TextView getDescription() {
+        return description;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.i("positon-of-clicked-item", String.valueOf(getAdapterPosition()));
+        Log.i("positon-of-clicked-item", String.valueOf(title.getText()));
+    }
+
+
 }
