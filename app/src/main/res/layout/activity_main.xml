@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="baman.lankahomes.lk.jaffnatemples.MainActivity"
+    android:background="@drawable/bg2">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/search_from"
+        android:id="@+id/txt_from"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:clickable="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_from"
+        android:layout_below="@+id/txt_from"
+        android:entries="@array/from_spinnerItems"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/distance_radius"
+        android:id="@+id/tv_distance"
+        android:textStyle="bold"
+        android:clickable="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:layout_below="@+id/spinner_from"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_radius"
+        android:layout_below="@+id/tv_distance"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:entries="@array/distanceRadiusItems"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/temple_type"
+        android:id="@+id/tv_temple_type"
+        android:textStyle="bold"
+        android:clickable="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:layout_below="@+id/spinner_radius"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_temple_type"
+        android:layout_below="@+id/tv_temple_type"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:entries="@array/templeTypeItems"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/nooftemples"
+        android:id="@+id/tv_nooftemples"
+        android:textStyle="bold"
+        android:clickable="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:layout_below="@+id/spinner_temple_type"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_no_of_temples"
+        android:layout_below="@+id/tv_nooftemples"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:entries="@array/NoOfTemplesItems"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:id="@+id/btn_search"
+        android:layout_below="@+id/spinner_no_of_temples"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/button_selector"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="18dp" />
+
+</RelativeLayout>

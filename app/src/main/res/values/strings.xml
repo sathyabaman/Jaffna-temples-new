@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Jaffna Temples</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="search_from">Search From</string>
+    <string name="distance_radius">Distance Radius</string>
+    <string name="temple_type">Temple Type</string>
+    <string name="nooftemples">No of Temples</string>
+    <string name="search">Search</string>
+    <string name="title_activity_search_result">SearchResult</string>
+    <string name="title_activity_search_results">SearchResults</string>
+    <string name="search_results">Search Results</string>
+</resources>

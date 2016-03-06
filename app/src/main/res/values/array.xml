@@ -1,0 +1,72 @@
+<resources>
+    <string-array name="from_spinnerItems">
+        <item>Please Select</item>
+        <item>My GPS Location</item>
+        <item>Chankanai</item>
+        <item>Jaffna Town</item>
+        <item>Karainagar</item>
+        <item>Karaveddy</item>
+        <item>Kilinochchi</item>
+        <item>Kopay</item>
+        <item>Maruthankerney</item>
+        <item>Nallur</item>
+        <item>Point Pedro</item>
+        <item>Sandilipay</item>
+        <item>Skanthapuram</item>
+        <item>Tellippalai</item>
+        <item>Uduvil</item>
+    </string-array>
+
+    <string-array name="distanceRadiusItems">
+        <item>Please Select</item>
+        <item>  1 KM</item>
+        <item>  2 KM</item>
+        <item>  3 KM</item>
+        <item>  4 KM</item>
+        <item>  5 KM</item>
+        <item>  6 KM</item>
+        <item>  7 KM</item>
+        <item>  8 KM</item>
+        <item>  9 KM</item>
+        <item>  10 KM</item>
+        <item>  20 KM</item>
+        <item>  30 KM</item>
+    </string-array>
+
+    <string-array name="templeTypeItems">
+        <item>Please Select</item>
+        <item>Amman</item>
+        <item>Anchaneyar</item>
+        <item>Ayyappan</item>
+        <item>Murugan</item>
+        <item>Pillaiyar</item>
+        <item>Sivan</item>
+    </string-array>
+
+
+    <string-array name="NoOfTemplesItems">
+        <item>Please Select</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+
+
+</resources>
