@@ -1,23 +1,51 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 
 public class SearchResult extends AppCompatActivity {
 
+    public String from;
+    public String radius;
+    public String temple_type;
+    public String no_of_temples;
+    public List<Data> data = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +56,23 @@ public class SearchResult extends AppCompatActivity {
 
         //get from intent
 
-        final String from = getIntent().getExtras().getString("from");
-        final String radius = getIntent().getExtras().getString("radius");
-        final String temple_type = getIntent().getExtras().getString("temple_type");
-        final String no_of_temples = getIntent().getExtras().getString("no_of_temples");
+        from = getIntent().getExtras().getString("from");
+        radius = getIntent().getExtras().getString("radius");
+        temple_type = getIntent().getExtras().getString("temple_type");
+        no_of_temples = getIntent().getExtras().getString("no_of_temples");
 
 
+        try {
+            data = fill_with_data(from, radius, temple_type, no_of_temples);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-
-        List<Data> data = fill_with_data();
+        launchRingDialog();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         Recycler_View_Adapter adapter = new Recycler_View_Adapter(data, getApplication());
@@ -66,39 +102,117 @@ public class SearchResult extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
 
 
+    public List<Data> launchRingDialog() {
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(SearchResult.this, "Please wait ...", "Loading data...", true);
+        ringProgressDialog.setCancelable(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {try {
+                        Thread.sleep(6000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }} catch (Exception e) {}
+                ringProgressDialog.dismiss();
+            }}).start();
+        return data;
+    }
 
 
-    public List<Data> fill_with_data() {
+
+    public List<Data> fill_with_data(String from, String radius, String type, String count) throws ExecutionException, InterruptedException, JSONException {
 
         List<Data> data = new ArrayList<>();
 
-        data.add(new Data("Batman vs Superman", "Following the destruction of Metropolis, Batman embarks on a personal vendetta against Superman ", R.drawable.ic_action_movie));
-        data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_action_movie));
-        data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_action_movie));
-        data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_action_movie));
-        data.add(new Data("Warcraft", "Fleeing their dying home to colonize another, fearsome orc warriors invade the peaceful realm of Azeroth. ", R.drawable.ic_action_movie));
-        data.add(new Data("Alice in Wonderland", "Alice in Wonderland: Through the Looking Glass ", R.drawable.ic_action_movie));
-        data.add(new Data("Batman vs Superman", "Following the destruction of Metropolis, Batman embarks on a personal vendetta against Superman ", R.drawable.ic_action_movie));
-        data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_action_movie));
-        data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_action_movie));
-        data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_action_movie));
-        data.add(new Data("Warcraft", "Fleeing their dying home to colonize another, fearsome orc warriors invade the peaceful realm of Azeroth. ", R.drawable.ic_action_movie));
-        data.add(new Data("Alice in Wonderland", "Alice in Wonderland: Through the Looking Glass ", R.drawable.ic_action_movie));
-        data.add(new Data("Batman vs Superman", "Following the destruction of Metropolis, Batman embarks on a personal vendetta against Superman ", R.drawable.ic_action_movie));
-        data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_action_movie));
-        data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_action_movie));
-        data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_action_movie));
-        data.add(new Data("Warcraft", "Fleeing their dying home to colonize another, fearsome orc warriors invade the peaceful realm of Azeroth. ", R.drawable.ic_action_movie));
-        data.add(new Data("Alice in Wonderland", "Alice in Wonderland: Through the Looking Glass ", R.drawable.ic_action_movie));
+        String value = new GetTemples().execute(from, radius, type, count).get();
+
+        JSONArray mJsonArray = new JSONArray(value);
+        JSONObject mJsonObject = new JSONObject();
+        for (int i = 0; i < mJsonArray.length(); i++) {
+            mJsonObject = mJsonArray.getJSONObject(i);
+            String id = mJsonObject.getString("id");
+            String name = mJsonObject.getString("name");
+            String description = mJsonObject.getString("description");
+            String latitude = mJsonObject.getString("latitude");
+            String Longitude = mJsonObject.getString("longitude");
+            String image = mJsonObject.getString("image");
+
+
+            String description2 = String.format("%.150s", description)+ "";
+            int leng = description2.length();
+            if(leng == 0){ description2 = "No descriptions provided."; }
+
+
+            //adding to data array list
+            data.add(new Data(name, description2, R.drawable.ic_action_movie));
+        }
 
         return data;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class GetTemples extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://172.16.110.17/jaffnatempleAPI/gettTemples.php");
+
+            try {
+                // Add your data
+                List<BasicNameValuePair> nameValuePairs = new ArrayList<>(2);
+                nameValuePairs.add(new BasicNameValuePair("from", arg0[0]));
+                nameValuePairs.add(new BasicNameValuePair("radius", arg0[1]));
+                nameValuePairs.add(new BasicNameValuePair("type", arg0[2]));
+                nameValuePairs.add(new BasicNameValuePair("count", arg0[3]));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                String responseString = EntityUtils.toString(entity, "UTF-8");
+
+                return responseString;
+
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+    }
+
+
+
 }
+
+
+
+
