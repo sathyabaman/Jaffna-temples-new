@@ -13,17 +13,22 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+    public Button btn_search;
+    public Spinner spn_from;
+    public Spinner spn_radius;
+    public Spinner spn_temple_type;
+    public Spinner spn_no_temple;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button btn_search = (Button) findViewById(R.id.btn_search);
-        final Spinner spn_from = (Spinner) findViewById(R.id.spinner_from);
-        final Spinner spn_radius = (Spinner) findViewById(R.id.spinner_radius);
-        final Spinner spn_temple_type = (Spinner) findViewById(R.id.spinner_temple_type);
-        final Spinner spn_no_temple = (Spinner) findViewById(R.id.spinner_no_of_temples);
+        btn_search = (Button) findViewById(R.id.btn_search);
+        spn_from = (Spinner) findViewById(R.id.spinner_from);
+        spn_radius = (Spinner) findViewById(R.id.spinner_radius);
+        spn_temple_type = (Spinner) findViewById(R.id.spinner_temple_type);
+        spn_no_temple = (Spinner) findViewById(R.id.spinner_no_of_temples);
 
 
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToNextActivity(){
         Intent intent = new Intent(getApplicationContext(), SearchResult.class);
+        intent.putExtra("from", spn_from.getSelectedItem().toString());
+        intent.putExtra("radius", spn_radius.getSelectedItem().toString());
+        intent.putExtra("temple_type", spn_temple_type.getSelectedItem().toString());
+        intent.putExtra("no_of_temples", spn_no_temple.getSelectedItem().toString());
         startActivity(intent);
     }
 
