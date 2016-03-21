@@ -18,6 +18,12 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import baman.lankahomes.lk.jaffnatemples.mainClasses.GPSTracker;
 
 public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback {
@@ -31,6 +37,7 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
     public int from_location = 1;
     public int radius_KM;
     public int zoom_level;
+    public String jsonValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,7 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
 
         //get from intent
         String radius = getIntent().getExtras().getString("radius");
-
+        jsonValue = getIntent().getExtras().getString("json_value");
 
         //Setting the intent radius
         String res[] = radius.split("\\s+");
@@ -59,8 +66,6 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
 
     }
 
@@ -90,6 +95,35 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
         //Draw circle for the given radius
         drawcircle(radius_KM, center_lat, center_lng);
 
+        try {
+            decode_json(jsonValue);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void decode_json(String value) throws JSONException {
+
+        JSONArray mJsonArray = new JSONArray(value);
+        JSONObject mJsonObject = new JSONObject();
+        for (int i = 0; i < mJsonArray.length(); i++) {
+            mJsonObject = mJsonArray.getJSONObject(i);
+            String id = mJsonObject.getString("id");
+            String name = mJsonObject.getString("name");
+            String description = mJsonObject.getString("description");
+            String latitude = mJsonObject.getString("latitude");
+            String Longitude = mJsonObject.getString("longitude");
+            String image = mJsonObject.getString("image");
+
+
+            String description2 = String.format("%.150s", description)+ "";
+            int leng = description2.length();
+            if(leng == 0){ description2 = "No descriptions provided."; }
+
+            displaymarkers(Double.parseDouble(latitude), Double.parseDouble(Longitude), name);
+
+        }
     }
 
 
@@ -143,7 +177,13 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera(update);
     }
 
+    public void displaymarkers(double lati, double longi, String templename){
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(lati, longi)).title(templename);
+        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon));
+        //marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mMap.addMarker(marker);
 
+    }
 
 
 

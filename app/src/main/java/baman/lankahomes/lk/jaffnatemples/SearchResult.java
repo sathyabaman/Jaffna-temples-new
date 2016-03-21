@@ -1,14 +1,19 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -46,6 +52,12 @@ public class SearchResult extends AppCompatActivity {
     public String temple_type;
     public String no_of_temples;
     public List<Data> data = null;
+    public String json_value;
+    public String from_lat_lng;
+    public String imei;
+    public String deviceName;
+    public String manufacturer;
+    public String deviceAssignedName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +72,15 @@ public class SearchResult extends AppCompatActivity {
         radius = getIntent().getExtras().getString("radius");
         temple_type = getIntent().getExtras().getString("temple_type");
         no_of_temples = getIntent().getExtras().getString("no_of_temples");
+        from_lat_lng = getIntent().getExtras().getString("from_lat_lng");
 
+        imei = getIMEI(this);
+        deviceAssignedName = getPhoneName();
+        deviceName = android.os.Build.MODEL;
+        manufacturer = Build.MANUFACTURER;
 
         try {
-            data = fill_with_data(from, radius, temple_type, no_of_temples);
+            data = fill_with_data(from, radius, temple_type, no_of_temples, from_lat_lng);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -88,7 +105,6 @@ public class SearchResult extends AppCompatActivity {
         Button btn_onmap = (Button) findViewById(R.id.btn_search_on_map);
 
 
-
         btn_onmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -97,6 +113,7 @@ public class SearchResult extends AppCompatActivity {
                 intent.putExtra("radius", radius);
                 intent.putExtra("temple_type", temple_type);
                 intent.putExtra("no_of_temples", no_of_temples);
+                intent.putExtra("json_value", json_value);
                 startActivity(intent);
             }
         });
@@ -122,14 +139,26 @@ public class SearchResult extends AppCompatActivity {
         return data;
     }
 
+    public String getIMEI(Activity activity) {
+        TelephonyManager telephonyManager = (TelephonyManager) activity
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getDeviceId();
+    }
+
+    public String getPhoneName()
+    {
+        BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+        String deviceName = myDevice.getName();
+        return deviceName;
+    }
 
 
-    public List<Data> fill_with_data(String from, String radius, String type, String count) throws ExecutionException, InterruptedException, JSONException {
+    public List<Data> fill_with_data(String from, String radius, String type, String count, String from_lat_lng) throws ExecutionException, InterruptedException, JSONException {
 
         List<Data> data = new ArrayList<>();
 
-        String value = new GetTemples().execute(from, radius, type, count).get();
-
+        String value = new GetTemples().execute(from, radius, type, count, from_lat_lng, imei, deviceName, manufacturer, deviceAssignedName).get();
+        json_value = value;
         JSONArray mJsonArray = new JSONArray(value);
         JSONObject mJsonObject = new JSONObject();
         for (int i = 0; i < mJsonArray.length(); i++) {
@@ -174,8 +203,6 @@ public class SearchResult extends AppCompatActivity {
 
 
 
-
-
     class GetTemples extends AsyncTask<String, Void, String> {
 
         @Override
@@ -191,6 +218,11 @@ public class SearchResult extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("radius", arg0[1]));
                 nameValuePairs.add(new BasicNameValuePair("type", arg0[2]));
                 nameValuePairs.add(new BasicNameValuePair("count", arg0[3]));
+                nameValuePairs.add(new BasicNameValuePair("from_lat_lng", arg0[4]));
+                nameValuePairs.add(new BasicNameValuePair("imei", arg0[5]));
+                nameValuePairs.add(new BasicNameValuePair("deviceName", arg0[6]));
+                nameValuePairs.add(new BasicNameValuePair("manufacturer", arg0[7]));
+                nameValuePairs.add(new BasicNameValuePair("deviceAssignedName", arg0[8]));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 // Execute HTTP Post Request
