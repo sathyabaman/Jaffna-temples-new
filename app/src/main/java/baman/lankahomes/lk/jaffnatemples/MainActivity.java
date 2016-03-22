@@ -5,19 +5,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import baman.lankahomes.lk.jaffnatemples.mainClasses.Domain;
 import baman.lankahomes.lk.jaffnatemples.mainClasses.GPSTracker;
 
 
@@ -28,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
     public Spinner spn_temple_type;
     public Spinner spn_no_temple;
     public String from_lat_lng = "nolatlng";
-
+    public String json_val;
     private GoogleMap mMap;
     GPSTracker gps;
+
+    Domain Api_url;
+    public String domain ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +60,28 @@ public class MainActivity extends AppCompatActivity {
         spn_temple_type = (Spinner) findViewById(R.id.spinner_temple_type);
         spn_no_temple = (Spinner) findViewById(R.id.spinner_no_of_temples);
 
+        Api_url = new Domain();
+        domain = Api_url.get_main_domain();
+
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
                 // TODO Auto-generated method stub
-                String from = spn_from.getSelectedItem().toString();
-                String radius = spn_radius.getSelectedItem().toString();
-                String templetype = spn_temple_type.getSelectedItem().toString();
-                String nooftemples = spn_no_temple.getSelectedItem().toString();
+                final String from = spn_from.getSelectedItem().toString();
+                final String radius = spn_radius.getSelectedItem().toString();
+                final String templetype = spn_temple_type.getSelectedItem().toString();
+                final String nooftemples = spn_no_temple.getSelectedItem().toString();
 
 
                 if(haveNetworkConnection()){
+
                             if(from.equals("My GPS Location")){
 
                                 get_my_gps_location();
                                 try {
-                                    Thread.sleep(3000);
+                                    Thread.sleep(2000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -69,13 +90,52 @@ public class MainActivity extends AppCompatActivity {
                                 if(!from_lat_lng.equals("nolatlng")){
                                     boolean isvalue = validate_form(from, radius, templetype, nooftemples);
                                     if (isvalue){
-                                        goToNextActivity();
+
+
+                                                try {
+                                                    json_val = new GetTemplesCount().execute(from, radius, templetype, nooftemples, from_lat_lng).get();
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                } catch (ExecutionException e) {
+                                                    e.printStackTrace();
+                                                }
+                                        Log.e("before activity", json_val);
+                                                int result_temple = Integer.parseInt(json_val);
+                                        Log.e("before activity", String.valueOf(result_temple));
+                                                if(result_temple > 0){
+                                                    goToNextActivity();
+                                                } else {
+                                                    show_error_message("Let's adjust the distance radius and search again.", "No temples found!");
+                                                }
+
                                     }
                                 }
                             }else{
                                 boolean isvalue = validate_form(from, radius, templetype, nooftemples);
                                 if (isvalue){
-                                    goToNextActivity();
+                                    // get result count
+
+
+                                    try {
+                                        json_val = new GetTemplesCount().execute(from, radius, templetype, nooftemples, from_lat_lng).get();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Log.e("before activity", json_val);
+                                    int result_temple = Integer.parseInt(json_val);
+                                    Log.e("before activity", String.valueOf(result_temple));
+                                    if(result_temple > 0){
+                                        goToNextActivity();
+                                    } else {
+                                        show_error_message("Let's adjust the distance radius and search again.", "No temples found!");
+                                    }
+
+
+
+
+
                                 }
                             }
                 }else {
@@ -174,5 +234,74 @@ public class MainActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class GetTemplesCount extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(domain+"countTemples.php");
+
+            try {
+                // Add your data
+                List<BasicNameValuePair> nameValuePairs = new ArrayList<>(2);
+                nameValuePairs.add(new BasicNameValuePair("from", arg0[0]));
+                nameValuePairs.add(new BasicNameValuePair("radius", arg0[1]));
+                nameValuePairs.add(new BasicNameValuePair("type", arg0[2]));
+                nameValuePairs.add(new BasicNameValuePair("count", arg0[3]));
+                nameValuePairs.add(new BasicNameValuePair("from_lat_lng", arg0[4]));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                String responseString = EntityUtils.toString(entity, "UTF-8");
+
+                return responseString;
+
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+    }
+
+
 
 }

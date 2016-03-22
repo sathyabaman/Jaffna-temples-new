@@ -1671,12 +1671,14 @@
         <item name="tabMode">fixed</item>
     </style></file><file path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values-v21/values-v21.xml" qualifiers="v21"><dimen name="design_navigation_padding_top_default">24dp</dimen></file></source></dataSet><dataSet config="main" generated-set="main$Generated"><source path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res"><file name="ic_launcher" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/mipmap-xhdpi/ic_launcher.png" qualifiers="xhdpi-v4" type="mipmap"/><file name="activity_search_on_map" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_search_on_map.xml" qualifiers="" type="layout"/><file name="row_layout" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/row_layout.xml" qualifiers="" type="layout"/><file name="activity_main" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_main.xml" qualifiers="" type="layout"/><file name="activity_search_result" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_search_result.xml" qualifiers="" type="layout"/><file name="activity_splash" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_splash.xml" qualifiers="" type="layout"/><file name="content_search_result" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/content_search_result.xml" qualifiers="" type="layout"/><file name="ic_launcher" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/mipmap-hdpi/ic_launcher.png" qualifiers="hdpi-v4" type="mipmap"/><file path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/values-w820dp/dimens.xml" qualifiers="w820dp-v13"><dimen name="activity_horizontal_margin">64dp</dimen></file><file name="flash_screen" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/flash_screen.png" qualifiers="" type="drawable"/><file name="bg2" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/bg2.png" qualifiers="" type="drawable"/><file name="blubackground" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/blubackground.png" qualifiers="" type="drawable"/><file name="ic_action_movie" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/ic_action_movie.png" qualifiers="" type="drawable"/><file name="button_selector" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/button_selector.xml" qualifiers="" type="drawable"/><file name="ic_launcher" path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/mipmap-mdpi/ic_launcher.png" qualifiers="mdpi-v4" type="mipmap"/><file path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/values/dimens.xml" qualifiers=""><dimen name="activity_vertical_margin">16dp</dimen><dimen name="activity_horizontal_margin">16dp</dimen><dimen name="fab_margin">16dp</dimen></file><file path="/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/values/array.xml" qualifiers=""><string-array name="templeTypeItems">
         <item>Please Select</item>
+        <item>All</item>
         <item>Amman</item>
         <item>Anchaneyar</item>
         <item>Ayyappan</item>
         <item>Murugan</item>
         <item>Pillaiyar</item>
         <item>Sivan</item>
+        <item>Other</item>
     </string-array><string-array name="NoOfTemplesItems">
         <item>Please Select</item>
         <item>1</item>
@@ -1699,6 +1701,11 @@
         <item>18</item>
         <item>19</item>
         <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
     </string-array><string-array name="distanceRadiusItems">
         <item>Please Select</item>
         <item>  1 KM</item>
@@ -1713,6 +1720,9 @@
         <item>  10 KM</item>
         <item>  20 KM</item>
         <item>  30 KM</item>
+        <item>  40 KM</item>
+        <item>  50 KM</item>
+        <item>  100 KM</item>
     </string-array><string-array name="from_spinnerItems">
         <item>Please Select</item>
         <item>My GPS Location</item>

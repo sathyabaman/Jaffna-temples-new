@@ -34,7 +34,7 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
     public double center_lat;
     public double center_lng;
 
-    public int from_location = 1;
+    public String from_location;
     public int radius_KM;
     public int zoom_level;
     public String jsonValue;
@@ -44,6 +44,7 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_search_on_map);
 
         //get from intent
+        from_location = getIntent().getExtras().getString("from");
         String radius = getIntent().getExtras().getString("radius");
         jsonValue = getIntent().getExtras().getString("json_value");
 
@@ -85,12 +86,65 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
 
         //set center lat,lng here
 
-//        double center_lat;
-//        double center_lng;
+        String center_lat_1;
+        String center_lng_1;
+
+        if(from_location.equals("My GPS Location")) {
+            //get users GPS location
+            show_my_gps_location();
+        }else{
+            switch (from_location) {
+                case "Chankanai":
+                    center_lat_1 = "9.748266"; center_lng_1 = "79.970265";
+                    break;
+                case "Jaffna Town":
+                    center_lat_1 = "9.664740"; center_lng_1 = "80.020788";
+                    break;
+                case "Karainagar":
+                    center_lat_1 = "9.745053"; center_lng_1 = "79.881946";
+                    break;
+                case "Karaveddy":
+                    center_lat_1 = "9.800168"; center_lng_1 = "80.200202";
+                    break;
+                case "Kilinochchi":
+                    center_lat_1 = "9.390484"; center_lng_1 = "80.406473";
+                    break;
+                case "Kopay":
+                    center_lat_1 = "9.705922"; center_lng_1 = "80.065380";
+                    break;
+                case "Maruthankerney":
+                    center_lat_1 = "9.622185"; center_lng_1 = "80.396826";
+                    break;
+                case "Nallur":
+                    center_lat_1 = "9.673756"; center_lng_1 = "80.033183";
+                    break;
+                case "Point Pedro":
+                    center_lat_1 = "9.824650"; center_lng_1 = "80.236677";
+                    break;
+                case "Sandilipay":
+                    center_lat_1 = "9.742129"; center_lng_1 = "79.986157";
+                    break;
+                case "Skanthapuram":
+                    center_lat_1 = "9.341890"; center_lng_1 = "80.302674";
+                    break;
+                case "Tellippalai":
+                    center_lat_1 = "9.785668"; center_lng_1 = "80.035347";
+                    break;
+                case "Uduvil":
+                    center_lat_1 = "9.732496"; center_lng_1 = "80.008623";
+                    break;
+                default:
+                    center_lat_1 = "6.924832"; center_lng_1 = "79.855990";
+                    break;
+            }
+
+                    center_lat  = Double.parseDouble(center_lat_1);
+                    center_lng  = Double.parseDouble(center_lng_1);
+                    show_selected_location();
+        }
 
 
-        //get users GPS location
-        show_my_gps_location();
+
 
         //Draw circle for the given radius
         drawcircle(radius_KM, center_lat, center_lng);
@@ -138,6 +192,15 @@ public class SearchOnMap extends AppCompatActivity implements OnMapReadyCallback
                         //.fillColor(Color.WHITE)
                 .fillColor(Color.TRANSPARENT));
     }
+
+
+    private void show_selected_location(){
+            gotoLocation(center_lat, center_lng, zoom_level);
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(center_lat, center_lng)).title("My Location");
+            mMap.addMarker(marker);
+    }
+
+
 
     private void show_my_gps_location(){
 

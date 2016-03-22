@@ -33,16 +33,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Serializable;
-import java.io.Writer;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import baman.lankahomes.lk.jaffnatemples.mainClasses.Domain;
 
 
 public class SearchResult extends AppCompatActivity {
@@ -58,12 +53,16 @@ public class SearchResult extends AppCompatActivity {
     public String deviceName;
     public String manufacturer;
     public String deviceAssignedName;
+
+    Domain Api_url;
+    public String domain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
         //get from intent
@@ -73,6 +72,9 @@ public class SearchResult extends AppCompatActivity {
         temple_type = getIntent().getExtras().getString("temple_type");
         no_of_temples = getIntent().getExtras().getString("no_of_temples");
         from_lat_lng = getIntent().getExtras().getString("from_lat_lng");
+
+        Api_url = new Domain();
+        domain = Api_url.get_main_domain();
 
         imei = getIMEI(this);
         deviceAssignedName = getPhoneName();
@@ -166,18 +168,15 @@ public class SearchResult extends AppCompatActivity {
             String id = mJsonObject.getString("id");
             String name = mJsonObject.getString("name");
             String description = mJsonObject.getString("description");
+            String address = mJsonObject.getString("address");
             String latitude = mJsonObject.getString("latitude");
             String Longitude = mJsonObject.getString("longitude");
             String image = mJsonObject.getString("image");
 
 
-            String description2 = String.format("%.150s", description)+ "";
-            int leng = description2.length();
-            if(leng == 0){ description2 = "No descriptions provided."; }
-
 
             //adding to data array list
-            data.add(new Data(name, description2, R.drawable.ic_action_movie));
+            data.add(new Data(name, address, R.drawable.ic_action_movie));
         }
 
         return data;
@@ -209,7 +208,7 @@ public class SearchResult extends AppCompatActivity {
         protected String doInBackground(String... arg0) {
             // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://172.16.110.17/jaffnatempleAPI/gettTemples.php");
+            HttpPost httppost = new HttpPost(domain+"gettTemples.php");
 
             try {
                 // Add your data

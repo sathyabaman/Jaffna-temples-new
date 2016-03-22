@@ -22,6 +22,11 @@
         <item>18</item>
         <item>19</item>
         <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
     </string-array>
     <string-array name="distanceRadiusItems">
         <item>Please Select</item>
@@ -37,6 +42,9 @@
         <item>  10 KM</item>
         <item>  20 KM</item>
         <item>  30 KM</item>
+        <item>  40 KM</item>
+        <item>  50 KM</item>
+        <item>  100 KM</item>
     </string-array>
     <string-array name="from_spinnerItems">
         <item>Please Select</item>
@@ -57,12 +65,14 @@
     </string-array>
     <string-array name="templeTypeItems">
         <item>Please Select</item>
+        <item>All</item>
         <item>Amman</item>
         <item>Anchaneyar</item>
         <item>Ayyappan</item>
         <item>Murugan</item>
         <item>Pillaiyar</item>
         <item>Sivan</item>
+        <item>Other</item>
     </string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
