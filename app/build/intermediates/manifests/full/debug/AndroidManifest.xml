@@ -63,6 +63,10 @@
         <activity
             android:name="baman.lankahomes.lk.jaffnatemples.SearchOnMap"
             android:label="@string/title_activity_search_on_map" />
+        <activity
+            android:name="baman.lankahomes.lk.jaffnatemples.Temple_Details"
+            android:label="@string/title_activity_temple__details"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

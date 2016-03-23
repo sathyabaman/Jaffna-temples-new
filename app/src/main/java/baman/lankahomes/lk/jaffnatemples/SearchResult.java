@@ -40,7 +40,7 @@ import java.util.concurrent.ExecutionException;
 import baman.lankahomes.lk.jaffnatemples.mainClasses.Domain;
 
 
-public class SearchResult extends AppCompatActivity {
+public class SearchResult extends AppCompatActivity{
 
     public String from;
     public String radius;
@@ -165,7 +165,7 @@ public class SearchResult extends AppCompatActivity {
         JSONObject mJsonObject = new JSONObject();
         for (int i = 0; i < mJsonArray.length(); i++) {
             mJsonObject = mJsonArray.getJSONObject(i);
-            String id = mJsonObject.getString("id");
+            String temple_id = mJsonObject.getString("id");
             String name = mJsonObject.getString("name");
             String description = mJsonObject.getString("description");
             String address = mJsonObject.getString("address");
@@ -176,7 +176,7 @@ public class SearchResult extends AppCompatActivity {
 
 
             //adding to data array list
-            data.add(new Data(name, address, R.drawable.ic_action_movie));
+            data.add(new Data(temple_id, name, address, R.drawable.ic_action_movie));
         }
 
         return data;

@@ -128,12 +128,20 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/marker_icon.png"
     },
     {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/image_view_style.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/image_view_style.xml"
+    },
+    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/ic_action_movie.png",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/ic_action_movie.png"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/textview_style.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/textview_style.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",

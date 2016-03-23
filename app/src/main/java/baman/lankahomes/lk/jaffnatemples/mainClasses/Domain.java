@@ -7,7 +7,7 @@ package baman.lankahomes.lk.jaffnatemples.mainClasses;
 public class Domain {
 
     public String get_main_domain(){
-        String domain = "http://192.168.1.5/jaffnatempleAPI/";
+        String domain = "http://172.16.110.17/jaffnatempleAPI/";
         return domain;
     }
 }

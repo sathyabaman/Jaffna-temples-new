@@ -40,6 +40,7 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<View_Holder> {
     public void onBindViewHolder(View_Holder holder, int position) {
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
+        holder.temple_id.setText(list.get(position).temple_id);
         holder.title.setText(list.get(position).title);
         holder.description.setText(list.get(position).description);
         holder.imageView.setImageResource(list.get(position).imageId);
