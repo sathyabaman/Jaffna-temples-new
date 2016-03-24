@@ -1,15 +1,15 @@
 package baman.lankahomes.lk.jaffnatemples;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +43,22 @@ public class Temple_Details extends AppCompatActivity {
     TextView description;
     TextView templeName;
     TextView address;
+    Button btn_directions;
+    TextView templeType;
+    TextView templeCoordinates;
+
+
+
+    String from_city_shared;
+    String fromLatLng_shared;
+    String from_temple_type;
+    String from_radius;
+    String from_coordinates;
+
+
+    public static final String MY_PREFS_NAME = "templeSavedData";
+
+
 
     Domain Api_url;
     public String domain;
@@ -52,19 +68,43 @@ public class Temple_Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temple__details);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-     //   setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
         Api_url = new Domain();
         domain = Api_url.get_main_domain();
 
 
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        from_city_shared = prefs.getString("from_city", "No name defined");//"No name defined" is the default value.
+        fromLatLng_shared = prefs.getString("fromLatLng", "No default"); //0 is the default value.
+        from_temple_type = prefs.getString("temple_type", "No default");
+        from_radius = prefs.getString("temple_radius", "No default");
+
+        // secting temple type and coordinates fom the domain class
+
+
+        if(!from_city_shared.equals("My GPS Location")){
+            Api_url.Set_latng_City(from_city_shared);
+            from_coordinates = Api_url.getFrom_Lat_LNG();
+        }else {
+            from_coordinates = fromLatLng_shared;
+        }
+
        temple_logo = (ImageView) findViewById(R.id.IV_temple_logo);
        description = (TextView) findViewById(R.id.TV_Description);
        templeName = (TextView) findViewById(R.id.TV_title);
        address = (TextView) findViewById(R.id.TV_address);
+       templeType = (TextView) findViewById(R.id.TV_templeType);
+       templeCoordinates = (TextView) findViewById(R.id.TV_coordinates);
+       btn_directions = (Button) findViewById(R.id.Btn_Directions);
 
+
+
+
+        //get temple id from the intent came from view holder
         temple_id = getIntent().getExtras().getString("temple_id");
 
 
@@ -170,9 +210,13 @@ public class Temple_Details extends AppCompatActivity {
                             String add = mJsonObject.getString("address");
 
                             if(descr.equals("")){ descr = "No Description Provided."; }
+                            String temple_type = Api_url.setTempleType(type);
+                            String cord = latitude+","+longitude;
                             templeName.setText(name);
+                            templeType.setText(temple_type);
                             address.setText(add);
                             description.setText(descr);
+                            templeCoordinates.setText(cord);
 
                         }
                     } catch (JSONException e) {

@@ -3,6 +3,7 @@ package baman.lankahomes.lk.jaffnatemples;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public String json_val;
     private GoogleMap mMap;
     GPSTracker gps;
+
+    public static final String MY_PREFS_NAME = "templeSavedData";
 
     Domain Api_url;
     public String domain ;
@@ -91,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                                     boolean isvalue = validate_form(from, radius, templetype, nooftemples);
                                     if (isvalue){
 
-
                                                 try {
                                                     json_val = new GetTemplesCount().execute(from, radius, templetype, nooftemples, from_lat_lng).get();
                                                 } catch (InterruptedException e) {
@@ -103,9 +105,20 @@ public class MainActivity extends AppCompatActivity {
                                                 int result_temple = Integer.parseInt(json_val);
                                         Log.e("before activity", String.valueOf(result_temple));
                                                 if(result_temple > 0){
+
+                                                    //saving data to shared preferences
+                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                    editor.putString("from_city", from);
+                                                    editor.putString("fromLatLng", from_lat_lng);
+                                                    editor.putString("temple_type", templetype);
+                                                    editor.putString("temple_radius", radius);
+                                                    editor.commit();
+
+
+
                                                     goToNextActivity();
                                                 } else {
-                                                    show_error_message("Let's adjust the distance radius and search again.", "No temples found!");
+                                                    show_error_message("Let's adjust the distance radius or temple type and search again.", "No temples found!");
                                                 }
 
                                     }
@@ -127,9 +140,22 @@ public class MainActivity extends AppCompatActivity {
                                     int result_temple = Integer.parseInt(json_val);
                                     Log.e("before activity", String.valueOf(result_temple));
                                     if(result_temple > 0){
+
+
+
+                                        //saving data to shared preferences
+                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                        editor.putString("from_city", from);
+                                        editor.putString("fromLatLng", from_lat_lng);
+                                        editor.putString("temple_type", templetype);
+                                        editor.putString("temple_radius", radius);
+                                        editor.commit();
+
+
+
                                         goToNextActivity();
                                     } else {
-                                        show_error_message("Let's adjust the distance radius and search again.", "No temples found!");
+                                        show_error_message("Let's adjust the distance radius  or temple type and search again.", "No temples found!");
                                     }
 
 
