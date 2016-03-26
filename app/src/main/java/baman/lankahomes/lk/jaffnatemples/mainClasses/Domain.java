@@ -10,7 +10,7 @@ public class Domain {
     public String temple_type;
 
     public String get_main_domain(){
-        String domain = "http://172.16.110.17/jaffnatempleAPI/";
+        String domain = "http://jaffnatemples.isaithuli.com/";
         return domain;
     }
 

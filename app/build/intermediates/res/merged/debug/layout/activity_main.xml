@@ -119,4 +119,18 @@
         android:textStyle="bold"
         android:textSize="18dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Solution By : Sathyabaman"
+        android:id="@+id/textView15"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignRight="@+id/txt_from"
+        android:layout_alignEnd="@+id/txt_from"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
+
 </RelativeLayout>

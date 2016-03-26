@@ -57,7 +57,6 @@ public class View_Holder extends RecyclerView.ViewHolder implements View.OnClick
         Log.i("positon-of-clicked-item", String.valueOf(temple_id.getText()));
 
 
-
         final Intent intent;
         intent =  new Intent(context, Temple_Details.class);
         intent.putExtra("temple_id", String.valueOf(temple_id.getText()));

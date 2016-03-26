@@ -8,6 +8,10 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/layout/design_navigation_item_separator.xml"
     },
     {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/content_adda_temple.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/content_adda_temple.xml"
+    },
+    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/select_dialog_multichoice_material.xml"
     },
@@ -32,12 +36,12 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/res/layout/place_autocomplete_fragment.xml"
     },
     {
-        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
-    },
-    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/place_autocomplete_progress.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/res/layout/place_autocomplete_progress.xml"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
@@ -48,12 +52,12 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_simple.xml"
     },
     {
-        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
-        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/layout/design_layout_snackbar_include.xml"
-    },
-    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/layout/design_layout_snackbar_include.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
@@ -88,6 +92,10 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_temple__details.xml"
     },
     {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/activity_suggest_an_edit.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_suggest_an_edit.xml"
+    },
+    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_menu_layout.xml"
     },
@@ -108,8 +116,16 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/content_view_image.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/content_view_image.xml"
+    },
+    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/activity_get_directions.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_get_directions.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/activity_search_on_map.xml",
@@ -126,6 +142,10 @@
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/activity_adda_temple.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_adda_temple.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
@@ -154,6 +174,10 @@
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/activity_view_image.xml",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/layout/activity_view_image.xml"
     },
     {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",

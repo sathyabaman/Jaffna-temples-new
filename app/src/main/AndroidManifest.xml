@@ -54,6 +54,18 @@
         <activity
             android:name=".Temple_Details"
             android:label="@string/title_activity_temple__details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GetDirections"
+            android:label="@string/title_activity_get_directions" />
+        <activity android:name=".SuggestAnEdit" />
+        <activity
+            android:name=".AddaTemple"
+            android:label="@string/title_activity_adda_temple"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewImage"
+            android:label="@string/title_activity_view_image"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

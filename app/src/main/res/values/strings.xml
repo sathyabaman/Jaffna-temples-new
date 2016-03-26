@@ -13,4 +13,9 @@
     <string name="add_temple">Add a New Temple</string>
     <string name="title_activity_search_on_map"> Search Results</string>
     <string name="title_activity_temple__details">Temple Details</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_get_directions">Get Directions</string>
+    <string name="title_activity_suggest_an_edit">Suggest an Edit</string>
+    <string name="title_activity_adda_temple">Add a Temple</string>
+    <string name="title_activity_view_image">View Image</string>
 </resources>

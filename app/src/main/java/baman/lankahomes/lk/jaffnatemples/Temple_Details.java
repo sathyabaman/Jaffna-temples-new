@@ -1,6 +1,7 @@
 package baman.lankahomes.lk.jaffnatemples;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,7 +48,8 @@ public class Temple_Details extends AppCompatActivity {
     Button btn_directions;
     TextView templeType;
     TextView templeCoordinates;
-
+    Button suggestAnEdit;
+    Button add_temple;
 
 
     String from_city_shared;
@@ -54,6 +57,10 @@ public class Temple_Details extends AppCompatActivity {
     String from_temple_type;
     String from_radius;
     String from_coordinates;
+    String from_temple_name;
+    String temple_coordinates;
+    String temple_image_name;
+
 
 
     public static final String MY_PREFS_NAME = "templeSavedData";
@@ -83,9 +90,7 @@ public class Temple_Details extends AppCompatActivity {
         from_temple_type = prefs.getString("temple_type", "No default");
         from_radius = prefs.getString("temple_radius", "No default");
 
-        // secting temple type and coordinates fom the domain class
-
-
+        // getting temple type and coordinates fom the domain class
         if(!from_city_shared.equals("My GPS Location")){
             Api_url.Set_latng_City(from_city_shared);
             from_coordinates = Api_url.getFrom_Lat_LNG();
@@ -100,8 +105,8 @@ public class Temple_Details extends AppCompatActivity {
        templeType = (TextView) findViewById(R.id.TV_templeType);
        templeCoordinates = (TextView) findViewById(R.id.TV_coordinates);
        btn_directions = (Button) findViewById(R.id.Btn_Directions);
-
-
+       suggestAnEdit = (Button) findViewById(R.id.Btn_suggest_edit);
+       add_temple = (Button) findViewById(R.id.Btn_temple_details);
 
 
         //get temple id from the intent came from view holder
@@ -110,7 +115,45 @@ public class Temple_Details extends AppCompatActivity {
 
         new GetTempleDetails().execute(temple_id);
 
-        new LoadImage().execute("http://static1.squarespace.com/static/55e6d5f9e4b08d00248f3aba/t/56164beae4b0c10192a2e435/1444308253273/IMG_0266.JPG");
+
+
+        btn_directions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getApplicationContext(), GetDirections.class);
+                intent.putExtra("center", from_coordinates);
+                intent.putExtra("radius", from_radius);
+                intent.putExtra("temple_name", from_temple_name);
+                intent.putExtra("temple_coordinates", temple_coordinates);
+                startActivity(intent);
+            }
+        });
+
+        suggestAnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getApplicationContext(), SuggestAnEdit.class);
+                intent.putExtra("temple_id", temple_id);
+                startActivity(intent);
+            }
+        });
+
+        add_temple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getApplicationContext(), AddaTemple.class);
+                startActivity(intent);
+            }
+        });
+
+        temple_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getApplicationContext(), ViewImage.class);
+                intent.putExtra("temple_image_name", temple_image_name);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -208,15 +251,23 @@ public class Temple_Details extends AppCompatActivity {
                             String latitude = mJsonObject.getString("latitude");
                             String longitude = mJsonObject.getString("longitude");
                             String add = mJsonObject.getString("address");
+                            String image = mJsonObject.getString("image");
 
                             if(descr.equals("")){ descr = "No Description Provided."; }
                             String temple_type = Api_url.setTempleType(type);
                             String cord = latitude+","+longitude;
                             templeName.setText(name);
+                            temple_coordinates = cord;
+
+                            from_temple_name = name;
                             templeType.setText(temple_type);
                             address.setText(add);
                             description.setText(descr);
                             templeCoordinates.setText(cord);
+
+                            temple_image_name = image;
+
+                            new LoadImage().execute(domain + "temple_images/" + image );
 
                         }
                     } catch (JSONException e) {
