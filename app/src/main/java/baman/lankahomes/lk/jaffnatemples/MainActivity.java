@@ -1,9 +1,11 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -27,9 +30,20 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import baman.lankahomes.lk.jaffnatemples.mainClasses.Domain;
@@ -51,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     Domain Api_url;
     public String domain ;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
         Api_url = new Domain();
         domain = Api_url.get_main_domain();
-
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,36 +310,67 @@ public class MainActivity extends AppCompatActivity {
 
     class GetTemplesCount extends AsyncTask<String, Void, String> {
 
+
+
         @Override
         protected String doInBackground(String... arg0) {
-            // Create a new HttpClient and Post Header
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(domain+"countTemples.php");
 
+            URL url = null;
             try {
-                // Add your data
-                List<BasicNameValuePair> nameValuePairs = new ArrayList<>(2);
-                nameValuePairs.add(new BasicNameValuePair("from", arg0[0]));
-                nameValuePairs.add(new BasicNameValuePair("radius", arg0[1]));
-                nameValuePairs.add(new BasicNameValuePair("type", arg0[2]));
-                nameValuePairs.add(new BasicNameValuePair("count", arg0[3]));
-                nameValuePairs.add(new BasicNameValuePair("from_lat_lng", arg0[4]));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                url = new URL(domain+"countTemples.php");
 
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                HttpEntity entity = response.getEntity();
-                String responseString = EntityUtils.toString(entity, "UTF-8");
+                Map<String,Object> params = new LinkedHashMap<>();
+                params.put("from", arg0[0]);
+                params.put("radius", arg0[1]);
+                params.put("type", arg0[2]);
+                params.put("count", arg0[3]);
+                params.put("from_lat_lng", arg0[4]);
+
+                StringBuilder postData = new StringBuilder();
+                for (Map.Entry<String,Object> param : params.entrySet()) {
+                    if (postData.length() != 0) postData.append('&');
+                    postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                    postData.append('=');
+                    postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+                }
+                byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+                conn.setDoOutput(true);
+                conn.getOutputStream().write(postDataBytes);
+
+                Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+                StringBuilder sb = new StringBuilder();
+                for (int c; (c = in.read()) >= 0;)
+                    sb.append((char) c);
+                String responseString = sb.toString();
+
+
 
                 return responseString;
 
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
+
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } catch (ProtocolException e1) {
+                e1.printStackTrace();
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
+
             return null;
         }
+
+
+
+
+
     }
 
 
