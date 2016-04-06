@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -120,17 +125,28 @@
         android:textSize="18dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Solution By : Sathyabaman V1.2.16.03.30"
+        android:text="Solution By : Sathyabaman V1.3.16.04.06 Official Sponsor : "
         android:id="@+id/textView15"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
+        android:textColor="#ffffff"
+        android:textSize="12dp"
+        android:layout_below="@+id/btn_search"
         android:layout_alignRight="@+id/txt_from"
         android:layout_alignEnd="@+id/txt_from"
-        android:textColor="#ffffff"
-        android:textSize="12dp" />
+        android:layout_marginTop="20dp" />
+
+    <ImageButton
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/IB_hinduReligious"
+        android:background="@drawable/hindureligiouslogo"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
+
+
+    </ScrollView>

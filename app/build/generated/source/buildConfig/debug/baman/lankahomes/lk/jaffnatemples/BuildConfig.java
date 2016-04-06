@@ -8,6 +8,6 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "baman.lankahomes.lk.jaffnatemples";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "";
-  public static final int VERSION_CODE = 2;
-  public static final String VERSION_NAME = "1.2.16.03.30";
+  public static final int VERSION_CODE = 3;
+  public static final String VERSION_NAME = "V1.3.16.04.06";
 }

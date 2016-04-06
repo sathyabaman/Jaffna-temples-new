@@ -80,6 +80,10 @@
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_pause_light.xml"
     },
     {
+        "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/hindureligiouslogo.png",
+        "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/hindureligiouslogo.png"
+    },
+    {
         "merged": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/build/intermediates/res/merged/debug/drawable/map_button_style.xml",
         "source": "/home/baman/AndroidStudioProjects/JaffnaTemples/app/src/main/res/drawable/map_button_style.xml"
     },

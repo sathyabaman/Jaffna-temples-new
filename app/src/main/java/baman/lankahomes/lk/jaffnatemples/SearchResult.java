@@ -1,10 +1,12 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +55,7 @@ import baman.lankahomes.lk.jaffnatemples.mainClasses.Domain;
 
 public class SearchResult extends AppCompatActivity{
 
+
     public String from;
     public String radius;
     public String temple_type;
@@ -60,10 +63,10 @@ public class SearchResult extends AppCompatActivity{
     public List<Data> data = null;
     public String json_value;
     public String from_lat_lng;
-    public String imei;
-    public String deviceName;
-    public String manufacturer;
-    public String deviceAssignedName;
+    public String imei = "";
+    public String deviceName = "";
+    public String manufacturer= "";
+    public String deviceAssignedName = "";
 
     Domain Api_url;
     public String domain;
@@ -87,10 +90,10 @@ public class SearchResult extends AppCompatActivity{
         Api_url = new Domain();
         domain = Api_url.get_main_domain();
 
-        imei = getIMEI(this);
-        deviceAssignedName = getPhoneName();
-        deviceName = android.os.Build.MODEL;
-        manufacturer = Build.MANUFACTURER;
+
+
+        setPhoneDetails();
+
 
         try {
             data = fill_with_data(from, radius, temple_type, no_of_temples, from_lat_lng);
@@ -134,7 +137,12 @@ public class SearchResult extends AppCompatActivity{
 
     }
 
-
+    public void setPhoneDetails(){
+        imei = getIMEI(this);
+        deviceAssignedName = getPhoneName();
+        deviceName = android.os.Build.MODEL;
+        manufacturer = Build.MANUFACTURER;
+    }
 
     public List<Data> launchRingDialog() {
         final ProgressDialog ringProgressDialog = ProgressDialog.show(SearchResult.this, "Please wait ...", "Loading data...", true);

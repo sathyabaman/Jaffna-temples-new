@@ -1,20 +1,26 @@
 package baman.lankahomes.lk.jaffnatemples;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -51,7 +57,9 @@ import baman.lankahomes.lk.jaffnatemples.mainClasses.GPSTracker;
 
 
 public class MainActivity extends AppCompatActivity {
+
     public Button btn_search;
+    public ImageButton hinduaffirs;
     public Spinner spn_from;
     public Spinner spn_radius;
     public Spinner spn_temple_type;
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public String from_lat_lng = "nolatlng";
     public String json_val;
     private GoogleMap mMap;
+
     GPSTracker gps;
 
     public static final String MY_PREFS_NAME = "templeSavedData";
@@ -77,9 +86,21 @@ public class MainActivity extends AppCompatActivity {
         spn_radius = (Spinner) findViewById(R.id.spinner_radius);
         spn_temple_type = (Spinner) findViewById(R.id.spinner_temple_type);
         spn_no_temple = (Spinner) findViewById(R.id.spinner_no_of_temples);
+        hinduaffirs = (ImageButton) findViewById(R.id.IB_hinduReligious);
 
         Api_url = new Domain();
         domain = Api_url.get_main_domain();
+
+
+        //go to hindu religious affairs website
+        hinduaffirs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Uri uri = Uri.parse("http://www.hindudept.gov.lk/web/index.php?lang=ta"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }});
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,12 +207,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
             }
         });
 
     }
+
+
+
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
